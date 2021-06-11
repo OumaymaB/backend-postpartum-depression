@@ -1,6 +1,11 @@
 package projet.innov.demo.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import projet.innov.demo.dao.CommentRepository;
+import projet.innov.demo.dao.PublicationRepository;
+import projet.innov.demo.dao.UserRepository;
+import projet.innov.demo.entities.Comment;
 import projet.innov.demo.entities.Publication;
 import projet.innov.demo.entities.User;
 
@@ -11,48 +16,55 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements IUserService{
 
-    @Override
-    public void createCompte() {
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private PublicationRepository publicationRepository;
+    @Autowired
+    private CommentRepository commentRepository;
 
+    @Override
+    public void createCompte(User user) {
+      userRepository.save(user);
     }
 
     @Override
-    public void deleteCompte() {
-
+    public void deleteCompte(long id) {
+     userRepository.deleteById(id);
     }
 
     @Override
-    public List<User> searchUsers() {
-        return null;
+    public List<User> searchUsers(String userName) {
+        return userRepository.findByUserNameContains(userName);
     }
 
     @Override
-    public void editProfile() {
-
+    public void editProfile(User user) {
+        userRepository.save(user);
     }
 
     @Override
-    public void addPublication() {
-
+    public void addPublication(Publication publication) {
+      publicationRepository.save(publication);
     }
 
     @Override
-    public void deletePublication() {
-
+    public void deletePublication(long id) {
+     publicationRepository.deleteById(id);
     }
 
     @Override
-    public List<Publication> getPublications() {
-        return null;
+    public void addComment(Comment comment) {
+      commentRepository.save(comment);
     }
 
     @Override
-    public void addComment() {
-
+    public void deleteComment(long id) {
+      commentRepository.deleteById(id);
     }
 
     @Override
-    public void deleteComment() {
+    public void followUser() {
 
     }
 }
