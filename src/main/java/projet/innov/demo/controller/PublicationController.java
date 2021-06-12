@@ -20,6 +20,6 @@ public class PublicationController {
     public Publication createPublication(@RequestBody PublicationRequestDTO request){
         User user=new User();
         user.setId(1);
-        return publicationService.createPublication(request.getHashTag(),request.getDescription(),user);
+        return publicationService.createPublication(request.getHashtag(),request.getDescription(),user);
     }
 }

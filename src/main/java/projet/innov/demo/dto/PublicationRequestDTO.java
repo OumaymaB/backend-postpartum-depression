@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PublicationRequestDTO {
-    private String hashTag;
+    private String hashtag;
     private String description;
 }

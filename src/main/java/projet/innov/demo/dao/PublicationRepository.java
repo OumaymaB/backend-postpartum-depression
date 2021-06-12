@@ -6,7 +6,6 @@ import projet.innov.demo.entities.Publication;
 
 import java.util.List;
 
-@RepositoryRestResource
 public interface PublicationRepository extends JpaRepository<Publication,Long> {
     List<Publication> findByUser_Id(Long id);
 }

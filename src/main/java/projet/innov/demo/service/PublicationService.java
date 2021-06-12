@@ -11,10 +11,10 @@ import projet.innov.demo.entities.User;
 public class PublicationService {
     private final PublicationRepository publicationRepository;
 
-    public Publication createPublication(String hashTag, String description, User user) {
+    public Publication createPublication(String hashtag, String description, User user) {
         Publication publication = Publication
                                     .builder()
-                                    .hashtag(hashTag)
+                                    .hashtag(hashtag)
                                     .description(description)
                                     .user(user)
                                     .build();
