@@ -1,5 +1,6 @@
 package projet.innov.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     private String userName;
     private String mail;
     private String password;
+    @Temporal(TemporalType.DATE)
     private Date dateBirth;
     private String photo;
     private String bio;

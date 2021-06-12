@@ -1,20 +1,23 @@
 package projet.innov.demo.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import projet.innov.demo.dto.CommentRequestDTO;
 import projet.innov.demo.dto.PublicationRequestDTO;
+import projet.innov.demo.entities.Comment;
 import projet.innov.demo.entities.Publication;
 import projet.innov.demo.entities.User;
+import projet.innov.demo.service.CommentService;
 import projet.innov.demo.service.PublicationService;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/publication")
 public class PublicationController {
     private final PublicationService publicationService;
+    private final CommentService commentService;
 
     @PostMapping(value = "")
     public Publication createPublication(@RequestBody PublicationRequestDTO request){
@@ -22,4 +25,13 @@ public class PublicationController {
         user.setId(1);
         return publicationService.createPublication(request.getHashtag(),request.getDescription(),request.getResources(),user);
     }
+    @PostMapping(value = "comments")
+    public Comment updatePubComments(@RequestBody PublicationRequestDTO request){
+        User user = new User();
+        user.setId(2);
+        //return publicationService.updatePublicationWithComments()
+        return null;
+    }
+
+
 }
