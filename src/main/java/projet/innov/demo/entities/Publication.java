@@ -15,9 +15,9 @@ public class Publication implements Serializable {
     private long id;
     private String hashtag;
     private String description;
-    @OneToMany
+    @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Resource> resources;
-    @OneToMany(mappedBy = "publication")
+    @OneToMany(mappedBy = "publication",orphanRemoval = true,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Collection<Comment> comments;
     @ManyToOne
     private User user;

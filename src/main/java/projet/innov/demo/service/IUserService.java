@@ -2,6 +2,7 @@ package projet.innov.demo.service;
 
 import projet.innov.demo.entities.Comment;
 import projet.innov.demo.entities.Publication;
+import projet.innov.demo.entities.Resource;
 import projet.innov.demo.entities.User;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public interface IUserService {
     public void editProfile(User user);
 
     //gestion des publications
+    public void addResource(Resource resource);
     public void addPublication(Publication publication);
     public void deletePublication(long id);
     public void addComment(Comment comment);

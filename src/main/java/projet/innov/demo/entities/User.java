@@ -24,9 +24,9 @@ public class User implements Serializable {
     private Date dateBirth;
     private String photo;
     private String bio;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Comment> comments;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",orphanRemoval = true,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Collection<Publication> publications;
     @OneToMany(mappedBy = "user")
     private Collection<TaskCalendar> tasksCalendar;

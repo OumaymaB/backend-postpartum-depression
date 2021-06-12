@@ -4,9 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import projet.innov.demo.dao.CommentRepository;
 import projet.innov.demo.dao.PublicationRepository;
+import projet.innov.demo.dao.ResourceRepository;
 import projet.innov.demo.dao.UserRepository;
 import projet.innov.demo.entities.Comment;
 import projet.innov.demo.entities.Publication;
+import projet.innov.demo.entities.Resource;
 import projet.innov.demo.entities.User;
 
 import javax.transaction.Transactional;
@@ -22,6 +24,8 @@ public class UserServiceImpl implements IUserService{
     private PublicationRepository publicationRepository;
     @Autowired
     private CommentRepository commentRepository;
+    @Autowired
+    private ResourceRepository resourceRepository;
 
     @Override
     public void createCompte(User user) {
@@ -41,6 +45,11 @@ public class UserServiceImpl implements IUserService{
     @Override
     public void editProfile(User user) {
         userRepository.save(user);
+    }
+
+    @Override
+    public void addResource(Resource resource) {
+        resourceRepository.save(resource);
     }
 
     @Override
