@@ -1,5 +1,6 @@
 package projet.innov.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ public class TaskCalendar implements Serializable {
     private String task;
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
-    private boolean done;
     @ManyToOne
+    @JsonIgnore
     private User user;
 }

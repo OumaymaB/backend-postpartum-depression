@@ -1,6 +1,5 @@
 package projet.innov.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,7 +27,7 @@ public class User implements Serializable {
     private String bio;
     @OneToMany(mappedBy = "user",orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Comment> comments;
-    @OneToMany(mappedBy = "user",orphanRemoval = true,cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user",orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Publication> publications;
     @OneToMany(mappedBy = "user")
     private Collection<TaskCalendar> tasksCalendar;

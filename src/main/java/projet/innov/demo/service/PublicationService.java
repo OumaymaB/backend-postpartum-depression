@@ -10,7 +10,6 @@ import projet.innov.demo.entities.Publication;
 import projet.innov.demo.entities.Resource;
 import projet.innov.demo.entities.User;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,7 +17,6 @@ import java.util.List;
 public class PublicationService {
     private final PublicationRepository publicationRepository;
     private final ResourceService resourceService;
-    private final CommentService commentService;
 
     public Publication createPublication(String hashtag, String description, List<ResourceRequestDTO> resourcesDTO, User user) {
 
@@ -30,25 +28,21 @@ public class PublicationService {
                 .build();
 
         publication = publicationRepository.save(publication);
-        List<Resource> resources=resourceService.createListResource(resourcesDTO, publication);
+        List<Resource> resources = resourceService.createListResource(resourcesDTO, publication);
         publication.setResources(resources);
         return publication;
     }
 
-    public Publication updatePublicationWithComments(List<CommentRequestDTO> commentsDTO,Publication publication, User user){
-        List<Comment> comments = commentService.createListComment(commentsDTO,publication,user);
-        publication.setComments(comments);
-        publicationRepository.save(publication);//*
-        return publication;
+    public Publication getById(Long id) {
+        return publicationRepository.findById(id).get();
     }
 
-    public void deletePublication(long id){
+    public void deletePublication(long id) {
         publicationRepository.deleteById(id);
     }
 
-    public List<Comment> getComments(long id){
-        return null;
+    public List<Publication> getPublications() {
+        User user = new User();
+        return publicationRepository.findByUserIn(user.getFollowing());
     }
-
-
 }

@@ -19,4 +19,7 @@ public class TestDepression implements Serializable {
     @OneToOne
     private User user;
 
+    public void addToTotal(int scale){
+        total+=scale;
+    }
 }

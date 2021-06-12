@@ -10,6 +10,7 @@ import projet.innov.demo.entities.User;
 import projet.innov.demo.service.CommentService;
 import projet.innov.demo.service.PublicationService;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -19,19 +20,28 @@ public class PublicationController {
     private final PublicationService publicationService;
     private final CommentService commentService;
 
-    @PostMapping(value = "")
-    public Publication createPublication(@RequestBody PublicationRequestDTO request){
-        User user=new User();
+    @PostMapping()
+    public Publication createPublication(@RequestBody PublicationRequestDTO request) {
+        User user = new User();
         user.setId(1);
-        return publicationService.createPublication(request.getHashtag(),request.getDescription(),request.getResources(),user);
+        return publicationService.createPublication(request.getHashtag(), request.getDescription(), request.getResources(), user);
     }
-    @PostMapping(value = "comments")
-    public Comment updatePubComments(@RequestBody PublicationRequestDTO request){
+
+    @PostMapping(value = "{id}/comments")
+    public Comment createPubComments(@PathVariable Long id, @RequestBody CommentRequestDTO request) {
         User user = new User();
         user.setId(2);
-        //return publicationService.updatePublicationWithComments()
-        return null;
+        Publication publication = publicationService.getById(id);
+        return commentService.createComment(request.getContent(), request.getDate(), publication, user);
     }
 
+    @GetMapping(value = "{id}/comments")
+    public Collection<Comment> getAllComments(@PathVariable Long id) {
+        return publicationService.getById(id).getComments();
+    }
 
+    @GetMapping
+    public List<Publication> getPublications() {
+        return publicationService.getPublications();
+    }
 }

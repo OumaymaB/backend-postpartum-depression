@@ -21,6 +21,7 @@ public class Publication implements Serializable {
     @OneToMany(orphanRemoval = true,cascade = CascadeType.ALL)
     private Collection<Resource> resources;
     @OneToMany(mappedBy = "publication",orphanRemoval = true,cascade = CascadeType.ALL)
+    @JsonIgnore
     private Collection<Comment> comments;
     @ManyToOne
     @JsonIgnore

@@ -20,7 +20,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    public Comment createComment(String content, Date date, Publication publication, User user){
+    public Comment createComment(String content, Date date, Publication publication, User user) {
         Comment comment = new Comment();
         comment.setContent(content);
         comment.setDate(date);
@@ -29,16 +29,7 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public List<Comment> createListComment(List<CommentRequestDTO> comments, Publication publication, User user){
-        List<Comment> comments1 = new ArrayList<>();
-        for (CommentRequestDTO comment : comments){
-            Comment comment1 = createComment(comment.getContent(),comment.getDate(),publication,user);
-            comments1.add(comment1);
-        }
-        return  comments1;
-    }
-
-    public void deleteComment(long id){
-      commentRepository.deleteById(id);
+    public void deleteComment(long id) {
+        commentRepository.deleteById(id);
     }
 }

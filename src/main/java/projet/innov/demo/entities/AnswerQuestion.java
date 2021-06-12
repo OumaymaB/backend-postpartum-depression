@@ -1,5 +1,6 @@
 package projet.innov.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ public class AnswerQuestion implements Serializable {
     private String answerQuestion;
     private int scale;
     @ManyToOne
+    @JsonIgnore
     private TestDepression testDepression;
 
 }
