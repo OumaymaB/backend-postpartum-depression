@@ -41,8 +41,7 @@ public class PublicationService {
         publicationRepository.deleteById(id);
     }
 
-    public List<Publication> getPublications() {
-        User user = new User();
+    public List<Publication> getPublications(User user) {
         return publicationRepository.findByUserIn(user.getFollowing());
     }
 }

@@ -14,9 +14,7 @@ import java.util.List;
 public class TaskService {
     private final TaskCalendarRepository taskRepository;
 
-    public TaskCalendar createTask(String task, Date date) {
-        User user = new User();
-        user.setId(1);
+    public TaskCalendar createTask(String task, Date date, User user) {
         TaskCalendar taskCalendar = new TaskCalendar();
         taskCalendar.setTask(task);
         taskCalendar.setDate(date);
@@ -24,9 +22,7 @@ public class TaskService {
         return taskRepository.save(taskCalendar);
     }
 
-    public List<TaskCalendar> getByDate(Date date) {
-        User user = new User();
-        user.setId(1);
+    public List<TaskCalendar> getByDate(Date date,User user) {
         return taskRepository.findByUserAndDate(user, date);
     }
 

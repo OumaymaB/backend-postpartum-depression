@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findByUserNameContains(String userName);
-    boolean findByMail(String mail);
+    User findByMail(String mail);
 }

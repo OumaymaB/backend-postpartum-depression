@@ -3,17 +3,18 @@ package projet.innov.demo.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-public class User implements Serializable {
+public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
@@ -37,7 +38,44 @@ public class User implements Serializable {
     private Collection<User> followers = new ArrayList<>();
     @ManyToMany
     private Collection<User> following = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_ROLES",
+            joinColumns = {@JoinColumn(name = "USER_ID") },
+            inverseJoinColumns = {@JoinColumn(name = "ROLE_ID") })
+    private Collection<Role> roles;
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
+        this.roles.forEach(role -> {
+            //authorities.add(new SimpleGrantedAuthority(role.getName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+        });
+        return authorities;
+    }
 
+    @Override
+    public String getUsername() {
+        return null;
+    }
 
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 }

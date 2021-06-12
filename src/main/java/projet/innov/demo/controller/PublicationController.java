@@ -1,6 +1,7 @@
 package projet.innov.demo.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import projet.innov.demo.dto.CommentRequestDTO;
 import projet.innov.demo.dto.PublicationRequestDTO;
@@ -21,16 +22,12 @@ public class PublicationController {
     private final CommentService commentService;
 
     @PostMapping()
-    public Publication createPublication(@RequestBody PublicationRequestDTO request) {
-        User user = new User();
-        user.setId(1);
+    public Publication createPublication(@RequestBody PublicationRequestDTO request,@AuthenticationPrincipal User user) {
         return publicationService.createPublication(request.getHashtag(), request.getDescription(), request.getResources(), user);
     }
 
     @PostMapping(value = "{id}/comments")
-    public Comment createPubComments(@PathVariable Long id, @RequestBody CommentRequestDTO request) {
-        User user = new User();
-        user.setId(2);
+    public Comment createPubComments(@PathVariable Long id, @RequestBody CommentRequestDTO request,@AuthenticationPrincipal User user) {
         Publication publication = publicationService.getById(id);
         return commentService.createComment(request.getContent(), request.getDate(), publication, user);
     }
@@ -41,7 +38,7 @@ public class PublicationController {
     }
 
     @GetMapping
-    public List<Publication> getPublications() {
-        return publicationService.getPublications();
+    public List<Publication> getPublications(@AuthenticationPrincipal User user) {
+        return publicationService.getPublications(user);
     }
 }
