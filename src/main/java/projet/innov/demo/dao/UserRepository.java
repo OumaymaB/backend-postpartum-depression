@@ -9,4 +9,5 @@ import java.util.List;
 @RepositoryRestResource
 public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findByUserNameContains(String userName);
+    boolean findByMail(String mail);
 }

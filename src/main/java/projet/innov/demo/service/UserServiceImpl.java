@@ -28,8 +28,14 @@ public class UserServiceImpl implements IUserService{
     private ResourceRepository resourceRepository;
 
     @Override
-    public void createCompte(User user) {
-      userRepository.save(user);
+    public boolean createCompte(User user) {
+
+      if(!userRepository.findByMail(user.getMail())){
+          userRepository.save(user);
+          return true;
+      }
+      return false;
+
     }
 
     @Override
@@ -54,6 +60,7 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public void addPublication(Publication publication) {
+        //ask about it
       publicationRepository.save(publication);
     }
 
@@ -74,6 +81,6 @@ public class UserServiceImpl implements IUserService{
 
     @Override
     public void followUser() {
-
+      //ask about this
     }
 }

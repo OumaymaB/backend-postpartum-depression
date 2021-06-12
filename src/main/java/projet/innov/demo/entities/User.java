@@ -32,9 +32,9 @@ public class User implements Serializable {
     private Collection<TaskCalendar> tasksCalendar;
     @OneToOne(mappedBy = "user")
     private TestDepression testDepression;
-    @ManyToMany(mappedBy = "following",fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "following")
     private Collection<User> followers = new ArrayList<>();
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Collection<User> following = new ArrayList<>();
 
 

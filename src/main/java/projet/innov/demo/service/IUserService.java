@@ -10,7 +10,7 @@ import java.util.List;
 public interface IUserService {
     //gestion des utilisateurs
 
-    public void createCompte(User user);
+    public boolean createCompte(User user);
     public void deleteCompte(long id);
     public List<User> searchUsers(String userName);
     public void editProfile(User user);
