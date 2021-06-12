@@ -1,5 +1,6 @@
 package projet.innov.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +17,10 @@ public class Comment implements Serializable {
     private Date date;
     private String content;
     @ManyToOne
+    @JsonIgnore
     private Publication publication;
     @ManyToOne
+    @JsonIgnore
     private User user;
 
 }
