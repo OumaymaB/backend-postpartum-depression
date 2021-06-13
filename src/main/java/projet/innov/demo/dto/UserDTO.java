@@ -1,5 +1,6 @@
 package projet.innov.demo.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ public class UserDTO {
     private String userName;
     private String mail;
     private String password;
+    @JsonFormat(pattern="dd-MM-yyyy")
     private Date dateBirth;
     private String photo;
     private String bio;

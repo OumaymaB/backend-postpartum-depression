@@ -7,9 +7,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import projet.innov.demo.dao.UserRepository;
+import projet.innov.demo.entities.Role;
 import projet.innov.demo.entities.User;
 import projet.innov.demo.enums.RoleEnum;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -32,8 +35,8 @@ public class UserService implements UserDetailsService {
             user.setDateBirth(dateBirth);
             user.setPhoto(photo);
             user.setBio(bio);
-            user.addRole(roleService.getRoleByName(RoleEnum.USER));
-
+            user.setRoles(new ArrayList<>());
+            user.addRole(roleService.getRoleByName(RoleEnum.USER.getRole()));
             user = userRepository.save(user);
             testService.createTest(user);
             return user;

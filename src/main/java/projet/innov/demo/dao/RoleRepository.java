@@ -5,5 +5,5 @@ import projet.innov.demo.entities.Role;
 import projet.innov.demo.enums.RoleEnum;
 
 public interface RoleRepository extends JpaRepository<Role,Long> {
-    Role findByRole(RoleEnum role);
+    Role findByRole(String role);
 }

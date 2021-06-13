@@ -11,7 +11,7 @@ import projet.innov.demo.enums.RoleEnum;
 public class RoleService {
     private final RoleRepository roleRepository;
 
-    public Role getRoleByName(RoleEnum role){
+    public Role getRoleByName(String role){
         return roleRepository.findByRole(role);
     }
 }
