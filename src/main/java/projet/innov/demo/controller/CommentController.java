@@ -1,12 +1,10 @@
 package projet.innov.demo.controller;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import projet.innov.demo.service.CommentService;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("/comments")

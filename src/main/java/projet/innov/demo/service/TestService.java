@@ -21,8 +21,8 @@ public class TestService {
         return testDepressionRepository.save(testDepression);
     }
 
-    public AnswerQuestion createAnswer(Long idTest, int numQuestion, String answer, int scale) {
-        TestDepression testDepression = getById(idTest);
+    public AnswerQuestion createAnswer(User user, int numQuestion, String answer, int scale) {
+        TestDepression testDepression = getByUser(user);
         AnswerQuestion answerQuestion = new AnswerQuestion();
         answerQuestion.setAnswerQuestion(answer);
         answerQuestion.setNumQuestion(numQuestion);
@@ -35,5 +35,9 @@ public class TestService {
 
     public TestDepression getById(Long id) {
         return testDepressionRepository.findById(id).get();
+    }
+
+    public TestDepression getByUser(User user) {
+        return testDepressionRepository.findByUser(user);
     }
 }

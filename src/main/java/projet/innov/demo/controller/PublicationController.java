@@ -1,6 +1,7 @@
 package projet.innov.demo.controller;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import projet.innov.demo.dto.CommentRequestDTO;
@@ -14,6 +15,7 @@ import projet.innov.demo.service.PublicationService;
 import java.util.Collection;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("/publication")
@@ -40,5 +42,10 @@ public class PublicationController {
     @GetMapping
     public List<Publication> getPublications(@AuthenticationPrincipal User user) {
         return publicationService.getPublications(user);
+    }
+    @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public void deletePublication(@PathVariable Long id){
+        publicationService.deletePublication(id);
     }
 }

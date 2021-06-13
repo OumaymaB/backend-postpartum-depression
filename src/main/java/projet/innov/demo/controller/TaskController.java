@@ -11,6 +11,7 @@ import projet.innov.demo.service.TaskService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @AllArgsConstructor
 @RequestMapping("task")

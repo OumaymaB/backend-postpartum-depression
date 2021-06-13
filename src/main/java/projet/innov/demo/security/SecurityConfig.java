@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
@@ -21,16 +22,9 @@ import javax.annotation.Resource;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	private final String[] PUBLIC_ENDPOINTS = { 
-			"/*",
-			"/*/*",
-			"/*/*/*",
-			"/*/*/*/*",
-			"/*/*/*/*/*",
-			"/*/*/*/*/*/*",
-			"/phoenix/authentification",
-			"/phoenix/authentification/"
-			
+	private final String[] PUBLIC_ENDPOINTS = {
+			"/register",
+			"/login"
 		};
 
 	@Resource(name = "userService")
@@ -70,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 	@Bean
-	public BCryptPasswordEncoder encoder(){
+	public PasswordEncoder encoder(){
 		return new BCryptPasswordEncoder();
 	}
 }

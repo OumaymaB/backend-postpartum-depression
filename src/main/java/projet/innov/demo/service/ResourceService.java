@@ -21,7 +21,7 @@ public class ResourceService {
     public Resource createResource(ResourceEnum type, String link, Publication publication) {
         Resource resource = new Resource();
         resource.setLink(link);
-        resource.setType(type.toString());
+        resource.setType(type);
         resource.setPublication(publication);
         return resourceRepository.save(resource);
     }
@@ -32,5 +32,9 @@ public class ResourceService {
             resources.add(resource);
         }
         return resources;
+    }
+
+    public Resource getById(Long id){
+        return resourceRepository.findById(id).get();
     }
 }

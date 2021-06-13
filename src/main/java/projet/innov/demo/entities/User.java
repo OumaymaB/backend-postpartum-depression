@@ -8,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.*;
 
 @Entity
@@ -49,33 +48,38 @@ public class User implements UserDetails {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         this.roles.forEach(role -> {
             //authorities.add(new SimpleGrantedAuthority(role.getName()));
-            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getName()));
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole().toString()));
         });
         return authorities;
     }
-
+    //	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    //
     @Override
     public String getUsername() {
-        return null;
+        return mail;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
+    }
+
+    public void addRole(Role role){
+        roles.add(role);
     }
 }
