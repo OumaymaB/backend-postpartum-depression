@@ -10,6 +10,7 @@ import projet.innov.demo.entities.Publication;
 import projet.innov.demo.entities.Resource;
 import projet.innov.demo.entities.User;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -18,10 +19,11 @@ public class PublicationService {
     private final PublicationRepository publicationRepository;
     private final ResourceService resourceService;
 
-    public Publication createPublication(String hashtag, String description, List<ResourceRequestDTO> resourcesDTO, User user) {
+    public Publication createPublication(Date date, String hashtag, String description, List<ResourceRequestDTO> resourcesDTO, User user) {
 
         Publication publication = Publication
                 .builder()
+                .date(date)
                 .hashtag(hashtag)
                 .description(description)
                 .user(user)

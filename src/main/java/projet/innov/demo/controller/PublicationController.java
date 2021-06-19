@@ -25,7 +25,7 @@ public class PublicationController {
 
     @PostMapping()
     public Publication createPublication(@RequestBody PublicationRequestDTO request,@AuthenticationPrincipal User user) {
-        return publicationService.createPublication(request.getHashtag(), request.getDescription(), request.getResources(), user);
+        return publicationService.createPublication(request.getDate(),request.getHashtag(), request.getDescription(), request.getResources(), user);
     }
 
     @PostMapping(value = "{id}/comments")

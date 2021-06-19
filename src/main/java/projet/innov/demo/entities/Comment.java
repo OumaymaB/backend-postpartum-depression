@@ -15,7 +15,7 @@ import java.util.Date;
 public class Comment implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
     private String content;
