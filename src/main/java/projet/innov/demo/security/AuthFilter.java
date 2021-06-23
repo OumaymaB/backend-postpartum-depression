@@ -33,6 +33,7 @@ public class AuthFilter extends OncePerRequestFilter {
 			authToken = header.replace(Constants.TOKEN_PREFIX,"");
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(authToken);
+
 			} catch (IllegalArgumentException e) {
 				logger.error("an error occured during getting username from token", e);
 			} catch (ExpiredJwtException e) {
@@ -41,6 +42,7 @@ public class AuthFilter extends OncePerRequestFilter {
 				logger.error("Authentication Failed. Username or Password not valid.");
 			}
 		} else {
+			System.out.println("token : "+header);
 			logger.warn("couldn't find bearer string, will ignore the header");
 		}
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {

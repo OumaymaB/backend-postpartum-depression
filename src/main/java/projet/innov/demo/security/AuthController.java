@@ -7,10 +7,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import projet.innov.demo.dto.UserDTO;
+import projet.innov.demo.entities.Publication;
 import projet.innov.demo.entities.User;
 import projet.innov.demo.service.UserService;
 
@@ -20,10 +22,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 @AllArgsConstructor
 public class AuthController {
@@ -87,4 +90,16 @@ public class AuthController {
 		resp.put("path",name);
 		return resp;
 	}
+
+    @GetMapping(path = "/user/{id}")
+    public User getUser(@PathVariable Long id) {
+        return userService.getById(id);
+    }
+
+    @GetMapping(path = "/users/{name}")
+    public List<User> getUsers(@PathVariable String name) {
+        return userService.getUsers(name);
+    }
+
+
 }

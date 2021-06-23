@@ -1,6 +1,8 @@
 package projet.innov.demo.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -56,26 +58,31 @@ public class User implements UserDetails {
     //	@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     //
     @Override
+    @JsonIgnore
     public String getUsername() {
         return mail;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }
@@ -83,4 +90,7 @@ public class User implements UserDetails {
     public void addRole(Role role){
         roles.add(role);
     }
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    public String getUser_Name(){return userName;}
 }
