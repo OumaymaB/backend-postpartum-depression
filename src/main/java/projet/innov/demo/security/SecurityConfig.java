@@ -24,7 +24,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	private final String[] PUBLIC_ENDPOINTS = {
 			"/register",
-			"/login"
+			"/login",
+			"/uploadPhoto/user"
 		};
 
 	@Resource(name = "userService")
