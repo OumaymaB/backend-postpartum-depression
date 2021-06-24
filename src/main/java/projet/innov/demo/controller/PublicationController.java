@@ -52,4 +52,9 @@ public class PublicationController {
     public void deletePublication(@PathVariable Long id){
         publicationService.deletePublication(id);
     }
+
+    @DeleteMapping("user/{id}")
+    public void deletePublicationUser(@PathVariable Long id){
+        publicationService.deletePublication(id);
+    }
 }

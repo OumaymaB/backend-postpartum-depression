@@ -60,7 +60,7 @@ public class AuthController {
         userService.deleteAccount(id);
     }
 
-    @PutMapping("/user/{id}")
+    @PutMapping("/user/{id}/update")
     public void updateUser(@RequestBody UserDTO userDTO, @PathVariable Long id) {
         userService.updateAccount(id, userDTO.getFirstName(), userDTO.getLastName(), userDTO.getUserName(), userDTO.getDateBirth(), userDTO.getPhoto(), userDTO.getBio());
     }
