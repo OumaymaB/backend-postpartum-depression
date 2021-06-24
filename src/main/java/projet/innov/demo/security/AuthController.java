@@ -80,7 +80,7 @@ public class AuthController {
 	}
 
 	@PostMapping(path = "/uploadPhoto/user")
-	public Map<String,Object> uploadPhoto(@RequestParam("image") MultipartFile file) throws Exception{
+	public Map<String,Object> uploadPhoto(MultipartFile file) throws Exception{
 		String name=file.getOriginalFilename();
 		int i= name.lastIndexOf(".");
 		if (i<0) throw new Exception();

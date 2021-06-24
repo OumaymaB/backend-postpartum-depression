@@ -39,9 +39,13 @@ public class PublicationController {
         return publicationService.getById(id).getComments();
     }
 
+    //@GetMapping
+    //public List<Publication> getPublications(@AuthenticationPrincipal User user) {
+       // return publicationService.getPublications(user.getId());
+    //}
     @GetMapping
-    public List<Publication> getPublications(@AuthenticationPrincipal User user) {
-        return publicationService.getPublications(user);
+    public List<Publication> getPublications() {
+        return publicationService.getAllSortByDate();
     }
     @DeleteMapping("{id}")
     @PreAuthorize("hasRole('ADMIN')")

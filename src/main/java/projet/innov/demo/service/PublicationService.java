@@ -1,7 +1,10 @@
 package projet.innov.demo.service;
 
 import lombok.AllArgsConstructor;
+import org.hibernate.Hibernate;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import projet.innov.demo.dao.PublicationRepository;
 import projet.innov.demo.dto.CommentRequestDTO;
 import projet.innov.demo.dto.ResourceRequestDTO;
@@ -18,6 +21,7 @@ import java.util.List;
 public class PublicationService {
     private final PublicationRepository publicationRepository;
     private final ResourceService resourceService;
+    private final UserService userService;
 
     public Publication createPublication(Date date, String hashtag, String description, List<ResourceRequestDTO> resourcesDTO, User user) {
 
@@ -43,7 +47,13 @@ public class PublicationService {
         publicationRepository.deleteById(id);
     }
 
-    public List<Publication> getPublications(User user) {
-        return publicationRepository.findByUserIn(user.getFollowing());
+    public List<Publication> getAllSortByDate(){
+        return publicationRepository.findAll(Sort.by(Sort.Direction.DESC, "date"));
     }
+
+    //@Transactional
+    //public List<Publication> getPublications(Long userId) {
+    //    User user=userService.getById(userId);
+    //    return publicationRepository.findByUserIn(user.getFollowing());
+    //}
 }

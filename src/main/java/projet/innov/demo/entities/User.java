@@ -1,6 +1,5 @@
 package projet.innov.demo.entities;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -15,7 +14,6 @@ import java.util.*;
 
 @Entity
 @Data @AllArgsConstructor @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,9 +21,11 @@ public class User implements UserDetails {
     private String lastName;
     private String userName;
     private String mail;
+    @JsonIgnore
     private String password;
     @Temporal(TemporalType.DATE)
     private Date dateBirth;
+    @JsonIgnore
     private String photo;
     private String bio;
     @OneToMany(mappedBy = "user",orphanRemoval = true,cascade = CascadeType.ALL)
@@ -40,6 +40,7 @@ public class User implements UserDetails {
     private Collection<User> followers = new ArrayList<>();
     @ManyToMany
     private Collection<User> following = new ArrayList<>();
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "USER_ROLES",
             joinColumns = {@JoinColumn(name = "USER_ID") },
